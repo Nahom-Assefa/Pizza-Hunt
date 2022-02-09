@@ -41,6 +41,7 @@ const handlePizzaSubmit = (event) => {
   ].map((topping) => {
     return topping.value;
   });
+  console.log(toppings);
 
   if (!pizzaName || !createdBy || !toppings.length) {
     return;

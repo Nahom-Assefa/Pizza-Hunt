@@ -22,8 +22,45 @@ const commentController = {
       .catch((err) => res.json(err));
   },
 
+  addReply({ params, body }, res) {
+    Comment.findOneAndUpdate(
+      { _id: params.commentId },
+      { $push: { replies: body } },
+      { new: true }
+    )
+      .then((dbPizzaData) => {
+        if (!dbPizzaData) {
+          res.status(400).json({ message: `No pizza found with this id!` });
+          return;
+        }
+        res.json(dbPizzaData);
+      })
+      .catch((err) => res.json(err));
+  },
+
+  removeReply({ params }, res) {
+    Comment.findOneAndDelete(
+      { _id: params.commentId },
+      { $pull: { replies: { replyId: params.replyId } } },
+      { new: true }
+    )
+      .then((dbPizzaData) => {
+        if (!dbPizzaData) {
+          res.status(400).json({ message: `No pizza found with this id!` });
+          return;
+        }
+        res.json(dbPizzaData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  },
+
   // remove comment
+  // how does it know the key association with the correct id values???
   removeComment({ params }, res) {
+    // console.log('params', params);
     Comment.findOneAndDelete({ _id: params.commentId })
       .then((deletedComment) => {
         if (!deletedComment) {

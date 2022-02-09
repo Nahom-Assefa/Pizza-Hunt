@@ -19,6 +19,7 @@ const pizzaController = {
 
   // get one pizza by id
   getPizzaById({ params }, res) {
+    // console.log('line 22', params);
     Pizza.findOne({ _id: params.id })
       .populate({
         path: "comments",
@@ -41,7 +42,7 @@ const pizzaController = {
 
   // create pizza
   createPizza({ body }, res) {
-    console.log("body", body);
+    // console.log("body", body);
     Pizza.create(body)
       .then((dbPizzaData) => res.json(dbPizzaData))
       .catch((err) => res.status(400).json(err));
