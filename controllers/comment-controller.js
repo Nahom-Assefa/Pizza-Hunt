@@ -39,6 +39,7 @@ const commentController = {
   },
 
   removeReply({ params }, res) {
+    console.log(params)
     Comment.findOneAndDelete(
       { _id: params.commentId },
       { $pull: { replies: { replyId: params.replyId } } },
