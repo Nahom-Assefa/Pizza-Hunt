@@ -61,15 +61,16 @@ const handlePizzaSubmit = (event) => {
     .then((postResponse) => {
       alert("Pizza created successfully!");
       console.log(postResponse);
+      document.location.replace("/");
     })
     .catch((err) => {
       console.log(err);
       saveRecord(formData);
     });
 
-    pizzaName.value = "";
-    createdBy.value = "";
-    size.value = "";
+    // pizzaName.value = "";
+    // createdBy.value = "";
+    // size.value = "";
 };
 
 $pizzaForm.addEventListener("submit", handlePizzaSubmit);

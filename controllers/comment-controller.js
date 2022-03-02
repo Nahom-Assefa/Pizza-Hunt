@@ -30,7 +30,7 @@ const commentController = {
     )
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
-          res.status(400).json({ message: `No pizza found with this id!` });
+          res.status(400).json({ message: `No comment found with this id!` });
           return;
         }
         res.json(dbPizzaData);
@@ -40,14 +40,14 @@ const commentController = {
 
   removeReply({ params }, res) {
     console.log(params)
-    Comment.findOneAndDelete(
+    Comment.findOneAndUpdate(
       { _id: params.commentId },
       { $pull: { replies: { replyId: params.replyId } } },
       { new: true }
     )
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
-          res.status(400).json({ message: `No pizza found with this id!` });
+          res.status(400).json({ message: `No comment found with this id!` });
           return;
         }
         res.json(dbPizzaData);
@@ -59,7 +59,6 @@ const commentController = {
   },
 
   // remove comment
-  // how does it know the key association with the correct id values???
   removeComment({ params }, res) {
     // console.log('params', params);
     Comment.findOneAndDelete({ _id: params.commentId })
