@@ -52,4 +52,4 @@ Created by Nahom Assefa
 
 ## Questions
 
-Post an issue if you see a bug or suggested improvement.
+Post an issue for suggested improvement.
